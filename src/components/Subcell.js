@@ -1,11 +1,12 @@
-import React, { Component } from 'react'
+import React from 'react'
 
-export default class Subcell extends Component {
-  render() {
-    return (
-      <div className="subcell">
-        
+export default function Subcell({value, display}) {
+  return (
+    <div className="subcell">
+      <div className="subcell-value">
+        {display ? value : ''}
       </div>
-    )
-  }
+    </div>
+  )
 }
+

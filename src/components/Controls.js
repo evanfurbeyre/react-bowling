@@ -9,6 +9,10 @@ export default class Controls extends Component {
     }
   }
 
+  handleClick(e){
+    this.props.onRoll(e.target.value)
+  }
+
   render() {
 
     let rollButtons = [...Array(11).keys()].map( i => {
@@ -17,17 +21,13 @@ export default class Controls extends Component {
           key={i}
           value={i} 
           className="roll-button" 
-          onClick={this.props.func}
+          onClick={ e => this.props.onRoll(e.target.value) }
         >
           {i}
         </button>
       )
     })
 
-    function handleRoll (e) {
-      console.log()
-      this.props.func()
-    }
 
     return (
       <div className="controls-container">
