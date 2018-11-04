@@ -2,15 +2,15 @@ import React from 'react'
 import Subcell from './Subcell'
 
 
-export default function Cell({subcells, value, display}) {
+export default function Cell({ score, rolls }) {
   return (
     <div className='cell'>
       <div className='subcells'>
-        <Subcell value={subcells[0]}/>
-        <Subcell value={subcells[1]}/>
-        <Subcell value={subcells[2]}/>
+        <Subcell roll={rolls[0] || ''}/>
+        <Subcell roll={rolls[1] || ''}/>
+        <Subcell roll={rolls[2] || ''}/>
       </div>
-      {display ? value : ''}
+      { score || ''}
     </div>
   )
 }

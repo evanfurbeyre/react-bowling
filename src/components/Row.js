@@ -1,51 +1,29 @@
-import React, { Component } from 'react'
+
+
+import React from 'react'
 import Cell from './Cell'
 import TenthCell from './TenthCell'
 
-export default class Row extends Component {
-  constructor(props){
-    super(props)
-    this.state = {
-      rolls:  [...Array(9)].map(() => [0,0]),
-      scores: [...Array(10)].map(() => 0),
-      totals: [...Array(10)].map(() => 0)
-    }
+export default function Row({ player, rolls, scores, total }) {
 
-    this.state.rolls.push([0,0,0]); // add the final round's rolls
-  }
+  // keys for the 9 standard cells, [0,1,2,...,8]
+  let cellIds = [...Array(9).keys()].map( i => i);
 
-  render() {
-    
-    // keys for the 9 standard cells, [0,1,2,...,8]
-    let cellIds = [...Array(9).keys()].map( i => i);
+  return (
+    <React.Fragment>
+      <div className="cell player-name">{ player }</div>
 
-    return (
-      <React.Fragment>
-        <div className="cell player-name">
-          {this.props.player}
-        </div>
+      {cellIds.map( i => <Cell // first 9 cells
+        key={i} 
+        score={ scores[i] || ''}
+        rolls={ rolls[i] || ''} />
+      )}
+      
+      <TenthCell 
+        score={ scores[9] || ''} 
+        rolls={ rolls[9] || ''} />
 
-        {/* // Render the first 9 cells */}
-        {cellIds.map( i => <Cell 
-          key={i} 
-          value={this.state.scores[i]} 
-          onRoll={ this.handleRoll }
-          display={this.props.round >= i} />
-        )}
-        
-        {/* // This cell has different logic so it gets its own component */}
-        <TenthCell 
-          value={this.state.scores[9]} 
-          subcells={this.state.rolls[9]} />
-
-        <div className="cell round-total">
-          {this.state.totals[this.props.round]}
-        </div>
-      </React.Fragment>
-    )
-  }
-
-  handleRoll() {
-    console.log('handling roll...')
-  }
+      <div className="cell round-total">{ total }</div>
+    </React.Fragment>
+  )
 }
