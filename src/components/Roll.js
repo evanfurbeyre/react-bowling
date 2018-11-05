@@ -1,13 +1,6 @@
 import React, { Component } from 'react'
 
 export default class Controls extends Component {
-  constructor(props){
-    super(props)
-
-    this.state = {
-      playerTurn: ""
-    }
-  }
 
   handleClick(e){
     this.props.onRoll(e.target.value)
