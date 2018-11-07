@@ -4,7 +4,7 @@ export default function Subcell({ roll }) {
   return (
     <div className="subcell">
       <div className="subcell-value">
-        { roll || ''}
+        { roll !== undefined ? roll : '' }
       </div>
     </div>
   )

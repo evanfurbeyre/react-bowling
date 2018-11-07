@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import NameInput from './NameInputs'
 import { connect } from 'react-redux'
 import { bindActionCreators } from  'redux'
 import { initGame } from '../actions'
@@ -13,33 +12,56 @@ class Init extends Component {
       players: ['']
     }
 
-    this.handleNameChange = this.handleNameChange.bind(this)
+    this.onNameChange = this.onNameChange.bind(this)
     this.handleAddPlayer = this.handleAddPlayer.bind(this)
     this.handleRemovePlayer = this.handleRemovePlayer.bind(this)
+    this.handleGameBegin = this.handleGameBegin.bind(this)
   }
 
-  handleNameChange(i) {
-    console.log("hnc")
+  handleGameBegin(e) {
+    e.preventDefault()
+    this.props.initGame({
+      players: this.state.players
+    })
+  }
+
+  onNameChange(i, e) {
+    let players = this.state.players
+    players[i] = e.target.value
+    this.setState({ players: players})
   }
 
   handleAddPlayer() {
-    console.log('add')
+    this.setState({
+      players: [...this.state.players, '']
+    })
   }
 
   handleRemovePlayer() {
-    console.log("rm")
+    const { players  } = this.state
+
+    this.setState({
+      players: [...players.slice(0, players.length-1)]
+    })
   }
 
+  renderNameInput(i) {
+    return (
+      <div key={i}>
+        <span>Player {i+1}</span>
+        <input 
+          type='text' 
+          value={this.state.players[i]}
+          onChange={this.onNameChange.bind(this, i)} />
+      </div>
+    )
+  }
 
   render() {
     const numPlayers = this.state.players.length
 
     let playerInputs = [...Array(numPlayers).keys()].map( i => {
-      return (
-        <NameInput 
-          key={i}
-          player={this.state.players[i]} />
-      )
+      return this.renderNameInput(i)
     })
 
     return (
@@ -54,7 +76,9 @@ class Init extends Component {
               Remove Player
             </span>
           </div>
-          <button type="submit" onClick={ () => this.props.initGame() }>Begin Game</button>
+          <button type="submit" onClick={ this.handleGameBegin }>
+            Begin Game
+          </button>
         </form>
       </div>
     )

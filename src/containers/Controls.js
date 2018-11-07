@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import Roll from '../components/Roll'
+import Roll from './Roll'
 import Init from '../components/Init'
 
 class Controls extends Component {
@@ -11,7 +11,7 @@ class Controls extends Component {
       <div className="controls-container">
         <div className="controls">
           { 
-            this.props.initialized 
+            this.props.game.initialized 
             ? <Roll />
             : <Init />
           }
