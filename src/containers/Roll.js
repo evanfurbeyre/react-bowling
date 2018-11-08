@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from  'redux'
-import { roll, lastRoundRoll } from '../actions'
+import { roll } from '../actions'
 
 class Roll extends Component {
 
@@ -53,8 +53,7 @@ function mapStateToProps({ game }){
 
 function mapDispatchToProps(dispatch) {
   return bindActionCreators({ 
-    roll: roll,
-    lastRoundRoll: lastRoundRoll
+    roll: roll
   }, dispatch)
 }
 

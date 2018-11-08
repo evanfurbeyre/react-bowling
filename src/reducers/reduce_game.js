@@ -1,13 +1,9 @@
-import { INIT_GAME, ROLL, LAST_ROUND_ROLL } from "../actions";
+import { INIT_GAME, ROLL } from "../actions";
 import reduceRoll  from "./game/reduce_roll"
 import reduceLastRoundRoll  from "./game/reduce_last_round_roll"
 
 
 export default function(state = null, action) {
-
-  let newState = Object.assign({}, state)
-  const roll = parseFloat(action.payload);
-
 
   switch(action.type) {
     case INIT_GAME:
@@ -24,7 +20,7 @@ export default function(state = null, action) {
 
       return {
         initialized: true,
-        gameOver: false, 
+        isGameOver: false, 
         players: players,
         whichRoll: 0,         // first, second, or third roll (0,1,2)
         pinsUp: 10,    
@@ -33,11 +29,18 @@ export default function(state = null, action) {
       }
 
     case ROLL:
-      const roll = parseFloat(action.payload);
-      return reduceRoll(newState, state, roll)
-      
-    case LAST_ROUND_ROLL:
-      return reduceLastRoundRoll(newState, state, roll)
+      let newState = Object.assign({}, state)
+      const roll = parseFloat(action.payload)
+      const isLastRound = state.round === 9
+      const isGameOver = state.round > 9
+
+      if (isLastRound) {
+        return reduceLastRoundRoll(newState, state, roll)
+      } else if (!isGameOver) {
+        return reduceRoll(newState, state, roll)
+      } else {
+        return newState
+      }
 
     default:
       return {
