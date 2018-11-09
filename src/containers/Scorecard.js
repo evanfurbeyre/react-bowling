@@ -17,8 +17,7 @@ class Scorecard extends Component {
           key={p.name} 
           player={p.name} 
           rolls={p.rolls} 
-          scores={p.scores}
-          total={p.total} />
+          scoresWithBonuses={p.scoresWithBonuses} />
       )
     });
 

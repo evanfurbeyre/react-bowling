@@ -14,27 +14,25 @@ export default function roll_reduce(newState, state, roll) {
     const isThirdRoll = whichRoll === 2
     const isNextTurnNewRound = turn === players.length - 1
     const strike = roll === 10
-    const spare = isSecondRoll && roundsRolls[0] + roundsRolls[1] === 10
-    const firstRollStrike = roundsRolls.length && roundsRolls[0]
+    const spare = !isFirstRoll && roundsRolls[0] + roundsRolls[1] === 10
+    const firstRollStrike = roundsRolls.length && roundsRolls[0] === 10
 
     // Set state boolean that controls third roll
-    const doesPlayerGetThirdRoll = (firstRollStrike) || (isSecondRoll && spare)
+    const doesPlayerGetThirdRoll = (firstRollStrike) || (spare)
     newState.players[turn].getsThirdRoll = doesPlayerGetThirdRoll
 
     // 1st Roll Logic
     if ( isFirstRoll ) {     
-      newState.whichRoll = 1
       if (strike) {
         newState.pinsUp = 10
       } else {
         newState.pinsUp -= roll
       }
+      newState.whichRoll = 1
     }
     
     // 2nd roll logic
     if ( isSecondRoll ) {
-      newState.whichRoll = 2
-
       if (spare || strike ) {
         newState.pinsUp = 10
       } else if (doesPlayerGetThirdRoll) {
@@ -42,19 +40,29 @@ export default function roll_reduce(newState, state, roll) {
       }
       
       if (!doesPlayerGetThirdRoll) {
-        newState.turn = isNextTurnNewRound ? 0 : turn + 1
-        newState.round = isNextTurnNewRound ? round + 1 : round
+        if (isNextTurnNewRound) {
+          newState.isGameOver = true
+        } else {
+          newState.turn = turn + 1
+          newState.whichRoll = 0
+          newState.pinsUp = 10
+        }
+      } else {
+        newState.whichRoll = 2
       }
+
     }
 
     // 3rd roll logic
-    if ( isThirdRoll && doesPlayerGetThirdRoll ) {
-      newState.whichRoll = 3
+    if ( isThirdRoll ) {
+      if (isNextTurnNewRound) {
+        newState.isGameOver = true
+      } else {
+        newState.turn = turn + 1
+        newState.whichRoll = 0
+        newState.pins = 10
+      }
     } 
-
-    if ( isNextTurnNewRound && round > 9) {
-      newState.isGameOver = true
-    }
 
     return newState
   }
@@ -127,10 +135,16 @@ export default function roll_reduce(newState, state, roll) {
       newState.players[turn].scoresWithBonuses[round-1] += roll
 
       // (case back-to-back strikes), a bonus is applied 2 rounds back
-      if ( prevPrevRoundStrike ) {
+      if ( prevPrevRoundStrike && isFirstRoll ) {
         newState.players[turn].scoresWithBonuses[round-2] += roll
       }
     }
+
+    // last round can cause invalid bonuses for rounds 8 and 9, so cap at 30
+    if (newState.players[turn].scoresWithBonuses[7] > 30) 
+      newState.players[turn].scoresWithBonuses[7] = 30
+    if (newState.players[turn].scoresWithBonuses[8] > 30) 
+      newState.players[turn].scoresWithBonuses[8] = 30
 
     return newState
   }

@@ -9,7 +9,7 @@ class Init extends Component {
     super(props)
 
     this.state = {
-      players: ['']
+      players: ['', '']
     }
 
     this.onNameChange = this.onNameChange.bind(this)

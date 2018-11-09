@@ -8,7 +8,7 @@ export default function Cell({ score, rolls }) {
         <Subcell roll={rolls[0] === 10 ? 'X' : rolls[0]}/>
         <Subcell roll={rolls[0] + rolls[1] === 10 ? '/' : rolls[1]}/>
       </div>
-      { score || ''}
+      { score !== undefined ? score : ''}
     </div>
   )
 }

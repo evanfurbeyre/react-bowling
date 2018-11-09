@@ -4,16 +4,18 @@ import Roll from './Roll'
 import Init from '../components/Init'
 
 class Controls extends Component {
-
   render() {
+    const { initialized, isGameOver } = this.props.game 
 
     return (
       <div className="controls-container">
         <div className="controls">
           { 
-            this.props.game.initialized 
-            ? <Roll />
-            : <Init />
+            ( !initialized && <Init /> )
+            ||
+            ( isGameOver && <h3>Game Over!</h3> )
+            ||
+            <Roll />
           }
         </div>
       </div>

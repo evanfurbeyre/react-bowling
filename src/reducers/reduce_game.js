@@ -13,8 +13,7 @@ export default function(state = null, action) {
           name: player,
           rolls: [[]],
           scores: [],
-          scoresWithBonuses :[],
-          total: 0
+          scoresWithBonuses: [],
         }
       })
 
@@ -32,15 +31,12 @@ export default function(state = null, action) {
       let newState = Object.assign({}, state)
       const roll = parseFloat(action.payload)
       const isLastRound = state.round === 9
-      const isGameOver = state.round > 9
 
       if (isLastRound) {
         return reduceLastRoundRoll(newState, state, roll)
-      } else if (!isGameOver) {
-        return reduceRoll(newState, state, roll)
       } else {
-        return newState
-      }
+        return reduceRoll(newState, state, roll)
+      } 
 
     default:
       return {

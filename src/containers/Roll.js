@@ -5,10 +5,6 @@ import { roll } from '../actions'
 
 class Roll extends Component {
 
-  // handleRoll() { START UP HERE TOMORROW
-
-  // }
-
   render() {
     // Set the state of the current players turn
     const { players, turn, whichRoll, pinsUp } = this.props.game
@@ -52,9 +48,7 @@ function mapStateToProps({ game }){
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ 
-    roll: roll
-  }, dispatch)
+  return bindActionCreators({ roll: roll }, dispatch)
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Roll)

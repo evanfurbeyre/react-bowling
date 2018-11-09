@@ -3,8 +3,7 @@ import Subcell from './Subcell'
 
 
 export default function Cell({ score, rolls }) {
-
-  let r1 = rolls[0], r2 = rolls[1], r3 = rolls[3]
+  let r1 = rolls[0], r2 = rolls[1], r3 = rolls[2]
 
   if (r1 === 10) r1 = 'X'
   if (r2 === 10) r2 = 'X'
@@ -20,7 +19,7 @@ export default function Cell({ score, rolls }) {
         <Subcell roll={r2}/>
         <Subcell roll={r3}/>
       </div>
-      { score || ''}
+      { score }
     </div>
   )
 }
