@@ -1,6 +1,8 @@
 import React from 'react'
 import Subcell from './Subcell'
 
+import '../style/Cell.css';
+
 export default function Cell({ score, rolls }) {
   return (
     <div className='cell'>

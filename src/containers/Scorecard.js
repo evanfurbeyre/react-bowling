@@ -2,6 +2,8 @@ import React, { Component } from 'react'
 import Row from '../components/Row'
 import { connect } from 'react-redux'
 
+import '../style/Scorecard.css';
+
 class Scorecard extends Component {
 
   render() {

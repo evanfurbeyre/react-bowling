@@ -1,28 +1,36 @@
 .App {
   text-align: center;
-}
-
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 20vmin;
+  height: 100vmax;
 }
 
 .App-header {
-  background-color: #282c34;
-  min-height: 50px;
+  width: 100%;
+  height: 200px;
+}
+
+.background {
+  background-image: url("../bowling-lanes.jpg");
+  height: 200px;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: relative;
+}
+
+.icons-container {
+  height: 100%;
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
 }
 
-.App-link {
-  color: #61dafb;
+.icon {
+  animation: icon-spin infinite 5s linear;
+  height: 20vmin;
+  margin: 10px 40px;
 }
 
-@keyframes App-logo-spin {
+@keyframes icon-spin {
   from {
     transform: rotate(0deg);
   }
@@ -31,75 +39,7 @@
   }
 }
 
-.scorecard-container {
-  margin-top: 70px;
-  height: 300px;
-  width: 100%;
+.game {
+  height: 100vmin;
   background-color: #282c34;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
-
-.scorecard {
-  width: 600px;
-  display: grid;
-  grid-template-columns: 2fr repeat(9, 1fr) 1.2fr 1.5fr;
-  grid-template-rows: 1fr repeat(4, 2fr);
-  margin: 30px;
-  border: 1px solid #61dafb;
-}
-
-.header {
-  display: flex;
-}
-
-.cell {
-  color: #61dafb;
-  border: 1px solid #61dafb;
-}
-
-
-.flex {
-  display: flex;
-}
-
-.subcells {
-  display: flex;
-  justify-content: flex-end;
-}
-
-.subcell {
-  width: 12px;
-  height: 12px;
-  border: 1px solid #61dafb;
-  position: relative;
-  top: -1px;
-  right: -1px;
-}
-
-.subcell-value {
-  position: relative;
-  top: -2px;
-  font-size: 12px;
-}
-
-.controls-container {
-  height: 120px;
-  width: 100%;
-  background-color: #282c34;
-  display: flex;
-  justify-content: center;
-}
-
-.controls {
-  color: #61dafb;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
-  margin: 20px;
-}
-
-.roll-button {
-  cursor: pointer;
 }

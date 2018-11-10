@@ -3,6 +3,9 @@ import { connect } from 'react-redux'
 import Roll from './Roll'
 import Init from '../components/Init'
 
+import '../style/Controls.css';
+
+
 class Controls extends Component {
   render() {
     const { initialized, isGameOver } = this.props.game 

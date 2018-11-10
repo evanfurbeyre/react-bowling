@@ -66,6 +66,8 @@ class Init extends Component {
 
     return (
       <div>
+        <h1>Welcome to Bowling!</h1>
+        <h4>Who will be playing?</h4>
         <form>
           {playerInputs}
           <div>

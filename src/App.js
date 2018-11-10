@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import Scorecard from './containers/Scorecard'
 import Controls from './containers/Controls'
-import logo from './logo.svg';
+import bowlingBall from './bowling-ball.png';
+import bowlingPin from './bowling-pin.png';
+
 import './style/App.css';
 
 class App extends Component {
@@ -10,10 +12,18 @@ class App extends Component {
     return (
       <div className="App">
         <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
+          <div className="background">
+            <div className="icons-container">
+              <img src={bowlingPin} className="icon bowling-pin" alt="bowling-pin" />
+              <img src={bowlingBall} className="icon bowling-ball" alt="bowling-ball" />
+              <img src={bowlingPin} className="icon bowling-pin" alt="bowling-pin" />
+            </div>
+          </div>
         </header>
-        <Scorecard />
-        <Controls />
+        <div className="game">
+          <Scorecard />
+          <Controls />
+        </div>
       </div>
     );
   }
