@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { bindActionCreators } from  'redux'
 import { roll } from '../actions'
 
 class Roll extends Component {
@@ -25,8 +24,8 @@ class Roll extends Component {
     })
 
     return (
-      <div className="controls-container">
-        <div className="controls">
+      <div className="rolls-container">
+        <div className="rolls">
           <div>
             {player}'s 
             {whichRoll === 0 && ' first '}
@@ -47,8 +46,4 @@ function mapStateToProps({ game }){
   return { game }
 }
 
-function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ roll: roll }, dispatch)
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(Roll)
+export default connect(mapStateToProps, { roll })(Roll)

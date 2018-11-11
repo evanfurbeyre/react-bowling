@@ -1,6 +1,7 @@
 .App {
   text-align: center;
-  height: 100vmax;
+  background-color: #282c34;
+  height: 100vmin;
 }
 
 .App-header {
@@ -37,9 +38,4 @@
   to {
     transform: rotate(360deg);
   }
-}
-
-.game {
-  height: 100vmin;
-  background-color: #282c34;
 }

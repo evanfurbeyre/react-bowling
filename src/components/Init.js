@@ -1,15 +1,15 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { bindActionCreators } from  'redux'
 import { initGame } from '../actions'
 
+import '../style/Init.css';
 
 class Init extends Component {
   constructor(props){
     super(props)
 
     this.state = {
-      players: ['', '']
+      players: ['', '']   // default to two players
     }
 
     this.onNameChange = this.onNameChange.bind(this)
@@ -20,9 +20,13 @@ class Init extends Component {
 
   handleGameBegin(e) {
     e.preventDefault()
-    this.props.initGame({
-      players: this.state.players
+    
+    let players = this.state.players.map( (p, i) => {
+      if (p === '') return `Player ${i+1}`    // If name is blank, default to Player $i
+      return p
     })
+
+    this.props.initGame({players})
   }
 
   onNameChange(i, e) {
@@ -39,16 +43,16 @@ class Init extends Component {
 
   handleRemovePlayer() {
     const { players  } = this.state
-
     this.setState({
       players: [...players.slice(0, players.length-1)]
     })
   }
 
+  // Row where player's name is entered
   renderNameInput(i) {
     return (
-      <div key={i}>
-        <span>Player {i+1}</span>
+      <div key={i} className="player-input-row">
+        <div className="player-number" >Player {i+1}</div>
         <input 
           type='text' 
           value={this.state.players[i]}
@@ -71,14 +75,14 @@ class Init extends Component {
         <form>
           {playerInputs}
           <div>
-            <span onClick={this.handleAddPlayer}>
+            <span className="player-control" onClick={this.handleAddPlayer}>
               Add Player
             </span>
-            <span onClick={this.handleRemovePlayer}>
+            <span className="player-control" onClick={this.handleRemovePlayer}>
               Remove Player
             </span>
           </div>
-          <button type="submit" onClick={ this.handleGameBegin }>
+          <button className="submit-players" type="submit" onClick={ this.handleGameBegin }>
             Begin Game
           </button>
         </form>
@@ -87,8 +91,4 @@ class Init extends Component {
   }
 }
 
-function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ initGame: initGame }, dispatch)
-}
-
-export default connect(null, mapDispatchToProps)(Init)
+export default connect(null, { initGame })(Init)

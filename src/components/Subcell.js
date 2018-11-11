@@ -1,7 +1,5 @@
 import React from 'react'
-
 import '../style/Subcell.css';
-
 
 export default function Subcell({ roll }) {
   return (
@@ -12,4 +10,3 @@ export default function Subcell({ roll }) {
     </div>
   )
 }
-

@@ -1,10 +1,12 @@
-export const INIT_GAME = 'INIT_GAME'
+export const INIT= 'INIT'
 export const ROLL = 'ROLL'
-// export const LAST_ROUND_ROLL = 'LAST_ROUND_ROLL'
+export const RESET = 'RESET'
+export const CLEAR = 'CLEAR'
+
 
 export function initGame(data) {
   return {
-    type: INIT_GAME,
+    type: INIT,
     payload: data
   }
 }
@@ -16,9 +18,16 @@ export function roll(data) {
   }
 }
 
-// export function lastRoundRoll(data) {
-//   return {
-//     type: LAST_ROUND_ROLL,
-//     payload: data
-//   }
-// }
+export function resetGame(data) {
+  return {
+    type: RESET,
+    payload: data
+  }
+}
+
+export function clearScores(data) {
+  return {
+    type: CLEAR,
+    payload: data
+  }
+}

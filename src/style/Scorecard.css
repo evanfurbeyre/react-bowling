@@ -1,0 +1,24 @@
+.scorecard-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.scorecard {
+  display: grid;
+  grid-template-columns: 2fr repeat(9, 1fr) 1.2fr 1.5fr;
+  margin: 30px;
+  border: 1px solid #61dafb;
+}
+
+.cell {
+  color: #61dafb;
+  border: 1px solid #61dafb;
+  height: 40px;
+}
+
+.header-cell {
+  color: #61dafb;
+  border: 1px solid #61dafb;
+  height: 30px;
+}
